@@ -1,6 +1,7 @@
 # 🚀 Escape Room Lógico
 
 Jogo em terminal desenvolvido em Python, com foco no ensino de lógica proposicional de forma interativa, progressiva e gamificada.
+Desenvolvido por **Aline de Albuquerque Henriques**.
 
 ---
 
@@ -86,7 +87,7 @@ python -c "from fases.conectivos import fase1; fase1()"
 
 ---
 
-## 🎮 Como funciona o jogo?
+## Como funciona o jogo?
 
 * Cada fase apresenta um desafio lógico
 * O jogador possui tentativas limitadas
@@ -96,17 +97,10 @@ python -c "from fases.conectivos import fase1; fase1()"
 
 ---
 
-## 📚 Conceitos abordados
+## Conceitos abordados
 
 * Conectivos lógicos
 * Tabela-verdade
 * Implicação lógica
 * Equivalência lógica
 * Tautologia, contradição e contingência
-
----
-
-
-## 👩‍💻 Autora
-
-**Aline de Albuquerque Henriques**
