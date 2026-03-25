@@ -4,7 +4,7 @@ Jogo em terminal desenvolvido em Python, com foco no ensino de lógica proposici
 
 ---
 
-## 🧠 Sobre o projeto
+## Sobre o projeto
 
 O **Escape Room Lógico** simula uma nave interestelar capturada por um vírus lógico.
 O jogador assume o papel de tripulante e precisa resolver desafios para recuperar o controle da nave.
@@ -13,7 +13,7 @@ O jogo contém **15 desafios**, organizados em **5 módulos temáticos**, com n�
 
 ---
 
-## 🎯 Objetivo
+## Objetivo
 
 * Ensinar lógica proposicional de forma prática
 * Desenvolver raciocínio lógico
@@ -22,7 +22,7 @@ O jogo contém **15 desafios**, organizados em **5 módulos temáticos**, com n�
 
 ---
 
-## 🧩 Módulos do jogo
+## Módulos do jogo
 
 | Módulo | Tema                     | Conteúdo                          |
 | ------ | ------------------------ | --------------------------------- |
@@ -78,7 +78,7 @@ python main.py
 
 ---
 
-## 🧪 Executar uma fase isolada
+## Executar uma fase isolada
 
 ```bash
 python -c "from fases.conectivos import fase1; fase1()"
@@ -86,7 +86,7 @@ python -c "from fases.conectivos import fase1; fase1()"
 
 ---
 
-## 🎮 Como funciona o jogo
+## 🎮 Como funciona o jogo?
 
 * Cada fase apresenta um desafio lógico
 * O jogador possui tentativas limitadas
@@ -110,10 +110,3 @@ python -c "from fases.conectivos import fase1; fase1()"
 ## 👩‍💻 Autora
 
 **Aline de Albuquerque Henriques**
-
----
-
-## 📄 Licença
-
-Este projeto é de caráter acadêmico e educacional.
-Licença MIT.
