@@ -4,7 +4,6 @@ import sys
 import time
 from config import TYPING_SPEED
 
-
 def escrever(texto: str, velocidade: float = TYPING_SPEED) -> None:
     for caractere in texto:
         sys.stdout.write(caractere)

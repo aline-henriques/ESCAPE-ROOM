@@ -46,7 +46,6 @@ def _rodar(titulo, subtitulo, narrativa, enunciado, opcoes, correta, dica):
 def fase1() -> bool:
     return _rodar(
         titulo    = "MÓDULO 2 — FASE 1  |  TABELA-VERDADE",
-        subtitulo = "Nível: Fácil",
         narrativa = [
             "  O painel exibe uma tabela-verdade com um valor oculto.",
             "  Descubra o resultado para desbloquear o sistema.",
@@ -67,7 +66,6 @@ def fase1() -> bool:
 def fase2() -> bool:
     return _rodar(
         titulo    = "MÓDULO 2 — FASE 2  |  TABELA-VERDADE",
-        subtitulo = "Nível: Médio",
         narrativa = [
             "  A tabela está quase completa — falta apenas uma linha.",
             "  Analise com atenção o caso em que a premissa é falsa.",
@@ -89,30 +87,4 @@ def fase2() -> bool:
         opcoes    = {"A": "Verdadeiro", "B": "Falso", "C": "Impossível determinar"},
         correta   = "A",
         dica      = "Premissa falsa torna a implicação automaticamente V.",
-    )
-
-
-def fase3() -> bool:
-    return _rodar(
-        titulo    = "MÓDULO 2 — FASE 3  |  TABELA-VERDADE",
-        subtitulo = "Nível: Difícil",
-        narrativa = [
-            "  O sistema exige a análise de uma expressão composta.",
-            "  Monte a tabela-verdade mentalmente antes de responder.",
-        ],
-        enunciado = [
-            "  Expressão:  (P ∧ Q) → (P ∨ R)",
-            "",
-            "  Para quantas linhas da tabela-verdade completa",
-            "  (P, Q, R com todos os valores possíveis)",
-            "  essa expressão é FALSA?",
-        ],
-        opcoes    = {
-            "A": "0 linhas — é sempre verdadeira (tautologia)",
-            "B": "1 linha",
-            "C": "2 linhas",
-            "D": "4 linhas",
-        },
-        correta   = "A",
-        dica      = "Se P∧Q=V então P=V, logo P∨R=V. A implicação nunca é falsa.",
     )

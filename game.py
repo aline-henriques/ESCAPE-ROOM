@@ -11,41 +11,36 @@ MODULOS = [
     {
         "nome":  "Conectivos Lógicos",
         "fases": [
-            ("Fase 1 — Fácil",   conectivos.fase1),
-            ("Fase 2 — Médio",   conectivos.fase2),
-            ("Fase 3 — Difícil", conectivos.fase3),
+            ("Fase 1",   conectivos.fase1),
+            ("Fase 2",   conectivos.fase2),
         ],
     },
     {
         "nome":  "Tabela-Verdade",
         "fases": [
-            ("Fase 1 — Fácil",   tabela_verdade.fase1),
-            ("Fase 2 — Médio",   tabela_verdade.fase2),
-            ("Fase 3 — Difícil", tabela_verdade.fase3),
+            ("Fase 1",   tabela_verdade.fase1),
+            ("Fase 2",   tabela_verdade.fase2),
         ],
     },
     {
         "nome":  "Implicação Lógica",
         "fases": [
-            ("Fase 1 — Fácil",   implicacao.fase1),
-            ("Fase 2 — Médio",   implicacao.fase2),
-            ("Fase 3 — Difícil", implicacao.fase3),
+            ("Fase 1",   implicacao.fase1),
+            ("Fase 2",   implicacao.fase2),
         ],
     },
     {
         "nome":  "Equivalência Lógica",
         "fases": [
-            ("Fase 1 — Fácil",   equivalencia.fase1),
-            ("Fase 2 — Médio",   equivalencia.fase2),
-            ("Fase 3 — Difícil", equivalencia.fase3),
+            ("Fase 1",   equivalencia.fase1),
+            ("Fase 2",   equivalencia.fase2),
         ],
     },
     {
         "nome":  "Tautologia / Contradição / Contingência",
         "fases": [
-            ("Fase 1 — Fácil",   tautologia.fase1),
-            ("Fase 2 — Médio",   tautologia.fase2),
-            ("Fase 3 — Difícil", tautologia.fase3),
+            ("Fase 1",   tautologia.fase1),
+            ("Fase 2",   tautologia.fase2),
         ],
     },
 ]
@@ -98,9 +93,8 @@ def _introducao() -> None:
     time.sleep(0.3)
     escrever("  Ano 2157. Sua nave foi capturada por um vírus lógico.")
     escrever("  Todos os 5 módulos de segurança estão bloqueados.")
-    escrever("  Cada módulo tem 3 desafios: fácil, médio e difícil.")
-    escrever("  Resolva todos os 15 desafios para libertar a nave!\n")
-    escrever("  Você tem 3 tentativas por desafio.")
+    escrever("  Resolva todos os 10 desafios para libertar a nave!\n")
+    escrever("  Você tem 5 tentativas por desafio.")
     escrever("  Erre demais e a nave se autodestruirá.\n")
     time.sleep(0.5)
     _teste_entrada()

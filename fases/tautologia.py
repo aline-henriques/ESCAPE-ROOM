@@ -46,7 +46,6 @@ def _rodar(titulo, subtitulo, narrativa, enunciado, opcoes, correta, dica):
 def fase1() -> bool:
     return _rodar(
         titulo    = "MÓDULO 5 — FASE 1  |  TAUTOLOGIA / CONTRADIÇÃO",
-        subtitulo = "Nível: Fácil",
         narrativa = [
             "  O sistema de autodestruição analisa expressões lógicas.",
             "  Classifique corretamente para desarmá-lo.",
@@ -69,7 +68,6 @@ def fase1() -> bool:
 def fase2() -> bool:
     return _rodar(
         titulo    = "MÓDULO 5 — FASE 2  |  TAUTOLOGIA / CONTRADIÇÃO",
-        subtitulo = "Nível: Médio",
         narrativa = [
             "  O segundo código de desarmamento envolve uma contradição.",
             "  Identifique a expressão que nunca pode ser verdadeira.",
@@ -86,31 +84,4 @@ def fase2() -> bool:
         },
         correta   = "B",
         dica      = "P∧¬P: P e ¬P nunca têm o mesmo valor. Sempre F = contradição.",
-    )
-
-
-def fase3() -> bool:
-    return _rodar(
-        titulo    = "MÓDULO 5 — FASE 3  |  LIBERAÇÃO TOTAL",
-        subtitulo = "Nível: Difícil  ⚠  PROTOCOLO FINAL",
-        narrativa = [
-            "  ⚠  ALERTA MÁXIMO — NÚCLEO SOBRECARREGADO!",
-            "  Apenas a resposta correta desativa a autodestruição.",
-        ],
-        enunciado = [
-            "  Expressão:  [(P ∧ Q) → R]  ∨  ¬R",
-            "",
-            "  Dica de análise:",
-            "  → Se ¬R = V: a expressão inteira é V (pelo ∨)",
-            "  → Se R  = V: (P∧Q)→V é sempre V",
-            "",
-            "  Essa expressão é:",
-        ],
-        opcoes    = {
-            "A": "Tautologia  (sempre Verdadeira)",
-            "B": "Contradição (sempre Falsa)",
-            "C": "Contingência (às vezes V, às vezes F)",
-        },
-        correta   = "A",
-        dica      = "Em todos os casos a expressão é V. É uma tautologia.",
     )

@@ -46,7 +46,6 @@ def _rodar(titulo, subtitulo, narrativa, enunciado, opcoes, correta, dica):
 def fase1() -> bool:
     return _rodar(
         titulo    = "MÓDULO 1 — FASE 1  |  CONECTIVOS",
-        subtitulo = "Nível: Fácil",
         narrativa = [
             "  O painel de acesso da primeira porta está bloqueado.",
             "  Resolva a operação lógica para continuar.",
@@ -66,7 +65,6 @@ def fase1() -> bool:
 def fase2() -> bool:
     return _rodar(
         titulo    = "MÓDULO 1 — FASE 2  |  CONECTIVOS",
-        subtitulo = "Nível: Médio",
         narrativa = [
             "  O segundo bloqueio exige conhecimento sobre disjunção.",
             "  Analise a expressão com cuidado.",
@@ -80,24 +78,4 @@ def fase2() -> bool:
         opcoes    = {"A": "Verdadeiro", "B": "Falso", "C": "Nenhuma das alternativas"},
         correta   = "B",
         dica      = "P∨Q = F∨F = F. Então F∧R = F∧V = F.",
-    )
-
-
-def fase3() -> bool:
-    return _rodar(
-        titulo    = "MÓDULO 1 — FASE 3  |  CONECTIVOS",
-        subtitulo = "Nível: Difícil",
-        narrativa = [
-            "  O terceiro bloqueio envolve negação combinada.",
-            "  Atenção ao operador ¬ aplicado a toda a expressão.",
-        ],
-        enunciado = [
-            "  Dados:  P = Verdadeiro  |  Q = Verdadeiro",
-            "",
-            "  Qual o valor de  ¬( P ∧ ¬Q )  ?",
-            "  (¬ = negação)",
-        ],
-        opcoes    = {"A": "Verdadeiro", "B": "Falso", "C": "Indeterminado"},
-        correta   = "A",
-        dica      = "¬Q = F. P∧F = F. ¬F = V.",
     )

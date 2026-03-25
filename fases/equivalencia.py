@@ -46,7 +46,6 @@ def _rodar(titulo, subtitulo, narrativa, enunciado, opcoes, correta, dica):
 def fase1() -> bool:
     return _rodar(
         titulo    = "MÓDULO 4 — FASE 1  |  EQUIVALÊNCIA LÓGICA",
-        subtitulo = "Nível: Fácil",
         narrativa = [
             "  O circuito de propulsão precisa de um fio substituto.",
             "  Encontre a expressão equivalente ao circuito original.",
@@ -70,7 +69,6 @@ def fase1() -> bool:
 def fase2() -> bool:
     return _rodar(
         titulo    = "MÓDULO 4 — FASE 2  |  EQUIVALÊNCIA LÓGICA",
-        subtitulo = "Nível: Médio",
         narrativa = [
             "  O segundo circuito usa uma lei de De Morgan.",
             "  Simplifique a expressão para reconectar o sistema.",
@@ -89,29 +87,4 @@ def fase2() -> bool:
         },
         correta   = "B",
         dica      = "De Morgan: ¬(P∨Q) ≡ ¬P∧¬Q.",
-    )
-
-
-def fase3() -> bool:
-    return _rodar(
-        titulo    = "MÓDULO 4 — FASE 3  |  EQUIVALÊNCIA LÓGICA",
-        subtitulo = "Nível: Difícil",
-        narrativa = [
-            "  O núcleo do sistema exige a contrapositiva.",
-            "  Essa é a última trava antes da fase final.",
-        ],
-        enunciado = [
-            "  Circuito original:  P → Q",
-            "",
-            "  Qual das expressões abaixo é a CONTRAPOSITIVA",
-            "  de P → Q e também lhe é equivalente?",
-        ],
-        opcoes    = {
-            "A": "Q → P",
-            "B": "¬P → ¬Q",
-            "C": "¬Q → ¬P",
-            "D": "¬P → Q",
-        },
-        correta   = "C",
-        dica      = "Contrapositiva de P→Q é ¬Q→¬P. Sempre equivalente ao original.",
     )

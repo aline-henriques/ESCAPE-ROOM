@@ -46,7 +46,6 @@ def _rodar(titulo, subtitulo, narrativa, enunciado, opcoes, correta, dica):
 def fase1() -> bool:
     return _rodar(
         titulo    = "MÓDULO 3 — FASE 1  |  IMPLICAÇÃO LÓGICA",
-        subtitulo = "Nível: Fácil",
         narrativa = [
             "  A IA de bordo apresenta um argumento.",
             "  Você precisa identificar se ele é VÁLIDO.",
@@ -70,7 +69,6 @@ def fase1() -> bool:
 def fase2() -> bool:
     return _rodar(
         titulo    = "MÓDULO 3 — FASE 2  |  IMPLICAÇÃO LÓGICA",
-        subtitulo = "Nível: Médio",
         narrativa = [
             "  A IA tenta enganar você com um argumento parecido.",
             "  Cuidado: nem todo raciocínio aparentemente correto é válido.",
@@ -88,30 +86,4 @@ def fase2() -> bool:
         },
         correta   = "B",
         dica      = "P→Q, ¬P. NÃO podemos concluir ¬Q. Isso é uma falácia.",
-    )
-
-
-def fase3() -> bool:
-    return _rodar(
-        titulo    = "MÓDULO 3 — FASE 3  |  IMPLICAÇÃO LÓGICA",
-        subtitulo = "Nível: Difícil",
-        narrativa = [
-            "  O sistema de segurança usa um argumento em cadeia.",
-            "  Analise cada passo antes de responder.",
-        ],
-        enunciado = [
-            '  "Se há falha no reator (P), então a pressão sobe (Q)."',
-            '  "Se a pressão sobe (Q), então o alarme dispara (R)."',
-            '  "O alarme NÃO disparou (¬R)."',
-            "",
-            "  O que podemos concluir?",
-        ],
-        opcoes    = {
-            "A": "Há falha no reator (P é verdadeiro)",
-            "B": "Não há falha no reator (¬P) — Modus Tollens",
-            "C": "Não podemos concluir nada",
-            "D": "A pressão subiu mesmo assim",
-        },
-        correta   = "B",
-        dica      = "P→Q, Q→R, ¬R. Modus Tollens: ¬R→¬Q→¬P. Logo ¬P.",
     )
