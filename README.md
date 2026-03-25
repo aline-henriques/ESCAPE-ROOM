@@ -10,7 +10,7 @@ Desenvolvido por **Aline de Albuquerque Henriques**.
 O **Escape Room Lógico** simula uma nave interestelar capturada por um vírus lógico.
 O jogador assume o papel de tripulante e precisa resolver desafios para recuperar o controle da nave.
 
-O jogo contém **15 desafios**, organizados em **5 módulos temáticos**, com níveis de dificuldade progressivos (fácil, médio e difícil).
+O jogo contém **10 desafios**, organizados em **5 módulos temáticos**.
 
 ---
 
