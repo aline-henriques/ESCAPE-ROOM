@@ -1,6 +1,8 @@
-# Fase 5 - Tautologias, Contradições e Contingências
+# ============================================================
+#  MÓDULO 5 — Tautologia / Contradição  |  Banco de perguntas
+# ============================================================
 
-import time
+import random
 from utils.display import (
     escrever, imprimir_cabecalho, imprimir_separador,
     imprimir_sucesso, imprimir_falha, imprimir_fim_de_jogo,
@@ -8,14 +10,100 @@ from utils.display import (
 )
 from config import MAX_TENTATIVAS, TIMER_ATIVO, TIMER_SEGUNDOS
 
+BANCO = [
+    {
+        "titulo":   "MÓDULO 5  |  TAUTOLOGIA / CONTRADIÇÃO",
+        "narrativa": ["  Classifique a expressão para desarmar o sistema."],
+        "enunciado": ["  Expressão:  P ∨ ¬P", "", "  Essa expressão é:"],
+        "opcoes":   {"A": "Tautologia  (sempre Verdadeira)",
+                     "B": "Contradição (sempre Falsa)",
+                     "C": "Contingência (às vezes V, às vezes F)"},
+        "correta":  "A",
+        "dica":     "P∨¬P: sempre V independente de P.",
+    },
+    {
+        "titulo":   "MÓDULO 5  |  TAUTOLOGIA / CONTRADIÇÃO",
+        "narrativa": ["  Identifique a expressão que nunca pode ser verdadeira."],
+        "enunciado": ["  Expressão:  P ∧ ¬P", "", "  Essa expressão é:"],
+        "opcoes":   {"A": "Tautologia  (sempre Verdadeira)",
+                     "B": "Contradição (sempre Falsa)",
+                     "C": "Contingência (às vezes V, às vezes F)"},
+        "correta":  "B",
+        "dica":     "P e ¬P nunca têm o mesmo valor. Sempre F.",
+    },
+    {
+        "titulo":   "MÓDULO 5  |  TAUTOLOGIA / CONTRADIÇÃO",
+        "narrativa": ["  ⚠  ALERTA MÁXIMO — NÚCLEO SOBRECARREGADO!"],
+        "enunciado": ["  Expressão:  [(P ∧ Q) → R]  ∨  ¬R", "",
+                      "  → Se ¬R = V: expressão é V (pelo ∨)",
+                      "  → Se R  = V: (P∧Q)→V é sempre V", "",
+                      "  Essa expressão é:"],
+        "opcoes":   {"A": "Tautologia  (sempre Verdadeira)",
+                     "B": "Contradição (sempre Falsa)",
+                     "C": "Contingência (às vezes V, às vezes F)"},
+        "correta":  "A",
+        "dica":     "Em todos os casos a expressão é V. Tautologia.",
+    },
+    {
+        "titulo":   "MÓDULO 5  |  TAUTOLOGIA / CONTRADIÇÃO",
+        "narrativa": ["  Classifique a expressão abaixo."],
+        "enunciado": ["  Expressão:  P → P", "", "  Essa expressão é:"],
+        "opcoes":   {"A": "Tautologia  (sempre Verdadeira)",
+                     "B": "Contradição (sempre Falsa)",
+                     "C": "Contingência (às vezes V, às vezes F)"},
+        "correta":  "A",
+        "dica":     "P→P: se P=V→V; se P=F→V. Sempre V.",
+    },
+    {
+        "titulo":   "MÓDULO 5  |  TAUTOLOGIA / CONTRADIÇÃO",
+        "narrativa": ["  Identifique a classificação desta expressão."],
+        "enunciado": ["  Expressão:  P ∧ Q", "", "  Essa expressão é:"],
+        "opcoes":   {"A": "Tautologia  (sempre Verdadeira)",
+                     "B": "Contradição (sempre Falsa)",
+                     "C": "Contingência (às vezes V, às vezes F)"},
+        "correta":  "C",
+        "dica":     "P∧Q depende dos valores de P e Q. Não é sempre V nem sempre F.",
+    },
+    {
+        "titulo":   "MÓDULO 5  |  TAUTOLOGIA / CONTRADIÇÃO",
+        "narrativa": ["  Classifique a expressão com implicação."],
+        "enunciado": ["  Expressão:  (P ∧ ¬P) → Q", "", "  Essa expressão é:"],
+        "opcoes":   {"A": "Tautologia  (sempre Verdadeira)",
+                     "B": "Contradição (sempre Falsa)",
+                     "C": "Contingência (às vezes V, às vezes F)"},
+        "correta":  "A",
+        "dica":     "P∧¬P = F (contradição). F→Q é sempre V.",
+    },
+    {
+        "titulo":   "MÓDULO 5  |  TAUTOLOGIA / CONTRADIÇÃO",
+        "narrativa": ["  Analise a expressão com disjunção."],
+        "enunciado": ["  Expressão:  P ∨ Q", "", "  Essa expressão é:"],
+        "opcoes":   {"A": "Tautologia  (sempre Verdadeira)",
+                     "B": "Contradição (sempre Falsa)",
+                     "C": "Contingência (às vezes V, às vezes F)"},
+        "correta":  "C",
+        "dica":     "P∨Q é F quando P=F e Q=F, e V nos demais casos.",
+    },
+    {
+        "titulo":   "MÓDULO 5  |  TAUTOLOGIA / CONTRADIÇÃO",
+        "narrativa": ["  Classifique a expressão com bicondicional."],
+        "enunciado": ["  Expressão:  (P → Q) ∧ (¬P → ¬Q)", "", "  Essa expressão é:"],
+        "opcoes":   {"A": "Tautologia  (sempre Verdadeira)",
+                     "B": "Contradição (sempre Falsa)",
+                     "C": "Contingência (às vezes V, às vezes F)"},
+        "correta":  "C",
+        "dica":     "Essa expressão equivale a P↔Q, que é contingência.",
+    },
+]
 
-def _rodar(titulo, subtitulo, narrativa, enunciado, opcoes, correta, dica):
-    imprimir_cabecalho(titulo, subtitulo)
-    for linha in narrativa:
+
+def _rodar(pergunta):
+    imprimir_cabecalho(pergunta["titulo"])
+    for linha in pergunta["narrativa"]:
         escrever(linha)
     print()
     imprimir_separador()
-    for linha in enunciado:
+    for linha in pergunta["enunciado"]:
         escrever(linha) if linha else print()
     imprimir_separador()
 
@@ -29,8 +117,8 @@ def _rodar(titulo, subtitulo, narrativa, enunciado, opcoes, correta, dica):
         if timer and timer.expirado:
             imprimir_fim_de_jogo()
             return False
-        resposta = perguntar_multipla_escolha(opcoes)
-        if resposta == correta:
+        resposta = perguntar_multipla_escolha(pergunta["opcoes"])
+        if resposta == pergunta["correta"]:
             if timer: timer.parar()
             imprimir_sucesso()
             return True
@@ -38,50 +126,10 @@ def _rodar(titulo, subtitulo, narrativa, enunciado, opcoes, correta, dica):
             imprimir_falha(tentativa, MAX_TENTATIVAS)
 
     if timer: timer.parar()
-    escrever(f"  💡 Dica: {dica}")
+    escrever(f"  💡 Dica: {pergunta['dica']}")
     imprimir_fim_de_jogo()
     return False
 
 
-def fase1() -> bool:
-    return _rodar(
-        titulo    = "MÓDULO 5 — FASE 1  |  TAUTOLOGIA / CONTRADIÇÃO",
-        narrativa = [
-            "  O sistema de autodestruição analisa expressões lógicas.",
-            "  Classifique corretamente para desarmá-lo.",
-        ],
-        enunciado = [
-            "  Expressão:  P ∨ ¬P",
-            "",
-            "  Essa expressão é:",
-        ],
-        opcoes    = {
-            "A": "Tautologia  (sempre Verdadeira)",
-            "B": "Contradição (sempre Falsa)",
-            "C": "Contingência (às vezes V, às vezes F)",
-        },
-        correta   = "A",
-        dica      = "P∨¬P: se P=V→V; se P=F→¬P=V→V. Sempre V = tautologia.",
-    )
-
-
-def fase2() -> bool:
-    return _rodar(
-        titulo    = "MÓDULO 5 — FASE 2  |  TAUTOLOGIA / CONTRADIÇÃO",
-        narrativa = [
-            "  O segundo código de desarmamento envolve uma contradição.",
-            "  Identifique a expressão que nunca pode ser verdadeira.",
-        ],
-        enunciado = [
-            "  Expressão:  P ∧ ¬P",
-            "",
-            "  Essa expressão é:",
-        ],
-        opcoes    = {
-            "A": "Tautologia  (sempre Verdadeira)",
-            "B": "Contradição (sempre Falsa)",
-            "C": "Contingência (às vezes V, às vezes F)",
-        },
-        correta   = "B",
-        dica      = "P∧¬P: P e ¬P nunca têm o mesmo valor. Sempre F = contradição.",
-    )
+def sortear(n=3):
+    return random.sample(BANCO, min(n, len(BANCO)))

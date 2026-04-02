@@ -1,48 +1,20 @@
-# Fluxo, tentativas e estado
+# ============================================================
+#  ESCAPE ROOM LÓGICO — Controlador do Jogo
+# ============================================================
 
 import time
 from utils.display import (
     escrever, imprimir_separador, imprimir_vitoria,
-    imprimir_banner_assunto, perguntar_multipla_escolha,
+    imprimir_banner_assunto,
 )
 from fases import conectivos, tabela_verdade, implicacao, equivalencia, tautologia
 
 MODULOS = [
-    {
-        "nome":  "Conectivos Lógicos",
-        "fases": [
-            ("Fase 1",   conectivos.fase1),
-            ("Fase 2",   conectivos.fase2),
-        ],
-    },
-    {
-        "nome":  "Tabela-Verdade",
-        "fases": [
-            ("Fase 1",   tabela_verdade.fase1),
-            ("Fase 2",   tabela_verdade.fase2),
-        ],
-    },
-    {
-        "nome":  "Implicação Lógica",
-        "fases": [
-            ("Fase 1",   implicacao.fase1),
-            ("Fase 2",   implicacao.fase2),
-        ],
-    },
-    {
-        "nome":  "Equivalência Lógica",
-        "fases": [
-            ("Fase 1",   equivalencia.fase1),
-            ("Fase 2",   equivalencia.fase2),
-        ],
-    },
-    {
-        "nome":  "Tautologia / Contradição / Contingência",
-        "fases": [
-            ("Fase 1",   tautologia.fase1),
-            ("Fase 2",   tautologia.fase2),
-        ],
-    },
+    {"nome": "Conectivos Lógicos",                    "modulo": conectivos},
+    {"nome": "Tabela-Verdade",                        "modulo": tabela_verdade},
+    {"nome": "Implicação Lógica",                     "modulo": implicacao},
+    {"nome": "Equivalência Lógica",                   "modulo": equivalencia},
+    {"nome": "Tautologia / Contradição / Contingência","modulo": tautologia},
 ]
 
 
@@ -71,6 +43,7 @@ def _teste_entrada() -> None:
         "se estudar vou passar na prova do professor lucas",
         "se eu estudar, passarei na prova do professor lucas",
         "se eu estudar passarei na prova do professor lucas",
+        "Se eu estudar, então vou conseguir passar na prova do professor Lucas"
     ]
 
     while True:
@@ -93,8 +66,9 @@ def _introducao() -> None:
     time.sleep(0.3)
     escrever("  Ano 2157. Sua nave foi capturada por um vírus lógico.")
     escrever("  Todos os 5 módulos de segurança estão bloqueados.")
-    escrever("  Resolva todos os 10 desafios para libertar a nave!\n")
-    escrever("  Você tem 5 tentativas por desafio.")
+    escrever("  Cada módulo sorteará 3 perguntas aleatórias do seu banco.")
+    escrever("  A cada partida as perguntas serão diferentes!\n")
+    escrever("  Você tem  tentativas por desafio.")
     escrever("  Erre demais e a nave se autodestruirá.\n")
     time.sleep(0.5)
     _teste_entrada()
@@ -103,23 +77,16 @@ def _introducao() -> None:
     print()
 
 
-def _transicao_fase(proxima_nome: str) -> None:
+def _transicao(proxima: str) -> None:
     print()
     imprimir_separador()
-    escrever(f"  🔓  Próximo desafio: {proxima_nome}...")
+    escrever(f"  🔓  Próximo desafio...")
     time.sleep(0.8)
 
 
-def _transicao_modulo(proximo_modulo: str) -> None:
+def _derrota(modulo_nome: str) -> None:
     print()
-    escrever("  ✨  MÓDULO COMPLETO! Avançando para o próximo...")
-    time.sleep(1)
-    imprimir_banner_assunto(proximo_modulo)
-
-
-def _derrota(fase_nome: str) -> None:
-    print()
-    escrever(f"  💥  Falha em: {fase_nome}")
+    escrever(f"  💥  Falha no módulo: {modulo_nome}")
     escrever("  A nave entrou em colapso. Missão encerrada.")
     print()
 
@@ -127,27 +94,31 @@ def _derrota(fase_nome: str) -> None:
 def iniciar() -> None:
     _introducao()
 
-    total_fases = sum(len(m["fases"]) for m in MODULOS)
-    fases_ok    = 0
+    total = len(MODULOS) * 3
+    concluidos = 0
 
-    for i, modulo in enumerate(MODULOS):
-        imprimir_banner_assunto(modulo["nome"])
+    for i, item in enumerate(MODULOS):
+        imprimir_banner_assunto(item["nome"])
 
-        for j, (nome_fase, executar_fase) in enumerate(modulo["fases"]):
-            passou = executar_fase()
+        perguntas = item["modulo"].sortear(3)
+
+        for j, pergunta in enumerate(perguntas):
+            passou = item["modulo"]._rodar(pergunta)
 
             if not passou:
-                _derrota(f"{modulo['nome']} — {nome_fase}")
+                _derrota(item["nome"])
                 return
 
-            fases_ok += 1
-            escrever(f"  📊  Progresso: {fases_ok}/{total_fases} desafios concluídos.")
+            concluidos += 1
+            escrever(f"  📊  Progresso: {concluidos}/{total} desafios concluídos.")
 
-            if j + 1 < len(modulo["fases"]):
-                proxima = modulo["fases"][j + 1][0]
-                _transicao_fase(proxima)
+            if j + 1 < len(perguntas):
+                _transicao(item["nome"])
 
         if i + 1 < len(MODULOS):
-            _transicao_modulo(MODULOS[i + 1]["nome"])
+            print()
+            escrever("  ✨  MÓDULO COMPLETO! Avançando para o próximo...")
+            time.sleep(1)
+            imprimir_banner_assunto(MODULOS[i + 1]["nome"])
 
     imprimir_vitoria()
