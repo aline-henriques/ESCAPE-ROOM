@@ -124,5 +124,4 @@ def _rodar(pergunta):
 
 
 def sortear(n=3):
-    """Retorna n perguntas aleatórias do banco."""
     return random.sample(BANCO, min(n, len(BANCO)))

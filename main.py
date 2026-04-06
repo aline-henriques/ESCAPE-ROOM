@@ -1,4 +1,6 @@
-# Função Principal de execução do jogo
+# ============================================================
+#  FUNÇÃO PRINCIPAL - EXECUÇÃO DO JOGO
+# ============================================================
 
 from game import iniciar
 
