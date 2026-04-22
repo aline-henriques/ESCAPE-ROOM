@@ -17,77 +17,18 @@ BANCO = [
         "enunciado": ["  Expressão: P → Q", "",
                       "  P = Verdadeiro  |  Q = Verdadeiro", "",
                       "  Qual o valor de P → Q?"],
-        "opcoes":   {"A": "Verdadeiro", "B": "Falso", "C": "Depende do contexto"},
+        "opcoes":   {"A": "Verdadeiro", "B": "Falso", "C": "Indeterminado"},
         "correta":  "A",
         "dica":     "P→Q só é F quando P=V e Q=F.",
     },
     {
         "titulo":   "MÓDULO 2  |  TABELA-VERDADE",
         "narrativa": ["  A tabela está quase completa — falta apenas uma linha."],
-        "enunciado": ["  Expressão: P → Q", "",
-                      "    ┌───────┬───────┬─────────┐",
-                      "    │   P   │   Q   │  P → Q  │",
-                      "    ├───────┼───────┼─────────┤",
-                      "    │   V   │   V   │    V    │",
-                      "    │   V   │   F   │    F    │",
-                      "    │   F   │   V   │    V    │",
-                      "    │   F   │   F   │   ???   │",
-                      "    └───────┴───────┴─────────┘", "",
-                      "  Qual o valor quando P=F e Q=F?"],
+        "enunciado": ["  Qual o valor de P → Q quando P=F e Q=F?", "",
+                      "  Lembre-se da regra da Condicional."],
         "opcoes":   {"A": "Verdadeiro", "B": "Falso", "C": "Impossível determinar"},
         "correta":  "A",
-        "dica":     "Premissa falsa torna a implicação automaticamente V.",
-    },
-    {
-        "titulo":   "MÓDULO 2  |  TABELA-VERDADE",
-        "narrativa": ["  Analise a expressão composta e monte a tabela mentalmente."],
-        "enunciado": ["  Expressão:  (P ∧ Q) → (P ∨ R)", "",
-                      "  Para quantas linhas da tabela-verdade completa",
-                      "  essa expressão é FALSA?"],
-        "opcoes":   {"A": "0 — é sempre verdadeira (tautologia)",
-                     "B": "1 linha", "C": "2 linhas", "D": "4 linhas"},
-        "correta":  "A",
-        "dica":     "Se P∧Q=V então P=V, logo P∨R=V. Nunca é falsa.",
-    },
-    {
-        "titulo":   "MÓDULO 2  |  TABELA-VERDADE",
-        "narrativa": ["  Avalie o bicondicional na tabela-verdade."],
-        "enunciado": ["  Expressão: P ↔ Q", "",
-                      "  P = Verdadeiro  |  Q = Falso", "",
-                      "  Qual o valor de P ↔ Q?"],
-        "opcoes":   {"A": "Verdadeiro", "B": "Falso", "C": "Indeterminado"},
-        "correta":  "B",
-        "dica":     "P↔Q é V somente quando P e Q têm o mesmo valor.",
-    },
-    {
-        "titulo":   "MÓDULO 2  |  TABELA-VERDADE",
-        "narrativa": ["  Complete a tabela-verdade da disjunção."],
-        "enunciado": ["  Expressão: P ∨ Q", "",
-                      "  P = Falso  |  Q = Falso", "",
-                      "  Qual o valor de P ∨ Q?"],
-        "opcoes":   {"A": "Verdadeiro", "B": "Falso", "C": "Indeterminado"},
-        "correta":  "B",
-        "dica":     "P∨Q é F somente quando AMBOS são F.",
-    },
-    {
-        "titulo":   "MÓDULO 2  |  TABELA-VERDADE",
-        "narrativa": ["  Avalie a expressão com negação na tabela."],
-        "enunciado": ["  Expressão: ¬P ∧ Q", "",
-                      "  P = Falso  |  Q = Verdadeiro", "",
-                      "  Qual o valor de ¬P ∧ Q?"],
-        "opcoes":   {"A": "Verdadeiro", "B": "Falso", "C": "Indeterminado"},
-        "correta":  "A",
-        "dica":     "¬P = V. V ∧ Q = V ∧ V = V.",
-    },
-    {
-        "titulo":   "MÓDULO 2  |  TABELA-VERDADE",
-        "narrativa": ["  Avalie a implicação com premissa falsa."],
-        "enunciado": ["  Expressão: P → Q", "",
-                      "  P = Falso  |  Q = Verdadeiro", "",
-                      "  Qual o valor de P → Q?"],
-        "opcoes":   {"A": "Verdadeiro", "B": "Falso", "C": "Indeterminado"},
-        "correta":  "A",
-        "dica":     "Quando P=F, P→Q é sempre V independente de Q.",
+        "dica":     "Se a premissa (P) é falsa, a implicação é sempre V.",
     },
     {
         "titulo":   "MÓDULO 2  |  TABELA-VERDADE",
@@ -99,8 +40,25 @@ BANCO = [
         "correta":  "A",
         "dica":     "P ∧ Q é V somente quando AMBOS são V.",
     },
+    {
+        "titulo":   "MÓDULO 2  |  TABELA-VERDADE",
+        "narrativa": ["  Analise a Disjunção Exclusiva (XOR)."],
+        "enunciado": ["  Expressão: P ⊕ Q", "",
+                      "  P = Verdadeiro  |  Q = Verdadeiro", "",
+                      "  Qual o valor de P ⊕ Q?"],
+        "opcoes":   {"A": "Verdadeiro", "B": "Falso", "C": "Indeterminado"},
+        "correta":  "B",
+        "dica":     "No OU exclusivo, valores iguais resultam em Falso.",
+    },
+    {
+        "titulo":   "MÓDULO 2  |  TABELA-VERDADE",
+        "narrativa": ["  Verificando o sensor de negação dupla."],
+        "enunciado": ["  Se P = Falso, qual o valor de ¬(¬P)?"],
+        "opcoes":   {"A": "Verdadeiro", "B": "Falso", "C": "Indeterminado"},
+        "correta":  "B",
+        "dica":     "A negação da negação volta ao valor original.",
+    }
 ]
-
 
 def _rodar(pergunta):
     imprimir_cabecalho(pergunta["titulo"])
@@ -122,6 +80,7 @@ def _rodar(pergunta):
         if timer and timer.expirado:
             imprimir_fim_de_jogo()
             return False
+            
         resposta = perguntar_multipla_escolha(pergunta["opcoes"])
         if resposta == pergunta["correta"]:
             if timer: timer.parar()
@@ -129,12 +88,11 @@ def _rodar(pergunta):
             return True
         else:
             imprimir_falha(tentativa, MAX_TENTATIVAS)
+            print(f"  💡 Dica: {pergunta['dica']}")
 
     if timer: timer.parar()
-    escrever(f"  💡 Dica: {pergunta['dica']}")
     imprimir_fim_de_jogo()
     return False
-
 
 def sortear(n=3):
     return random.sample(BANCO, min(n, len(BANCO)))

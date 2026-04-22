@@ -1,112 +1,84 @@
-# 🚀 Escape Room Lógico
+```markdown
+# 🚀 Escape Room Lógico v2.0
 
-Jogo em terminal desenvolvido em Python, com foco no ensino de lógica proposicional de forma interativa, progressiva e gamificada.
-Desenvolvido por **Aline de Albuquerque Henriques**.
+[cite_start]Jogo educativo desenvolvido integralmente em Python, com foco no ensino de conceitos de lógica proposicional de forma interativa, progressiva e gamificada[cite: 8, 14]. [cite_start]O projeto simula uma nave interestelar comprometida por um vírus lógico, onde o jogador assume o papel de tripulante para restaurar os sistemas[cite: 9, 15].
 
----
-
-## Sobre o projeto
-
-O **Escape Room Lógico** simula uma nave interestelar capturada por um vírus lógico.
-O jogador assume o papel de tripulante e precisa resolver desafios de lógica proposicional para recuperar o controle da nave.
-
-O jogo contém **5 módulos temáticos**, cada um com um **banco de 8 perguntas**.
-A cada partida, **3 perguntas são sorteadas aleatoriamente** de cada banco — garantindo que o jogo seja diferente toda vez que você jogar.
+[cite_start]Desenvolvido por **Aline de Albuquerque Henriques** para a disciplina de Lógica para Computação (UNICAP)[cite: 1, 4, 19].
 
 ---
 
-## Objetivo
+## ✨ Implementações e Diferenciais (v2.0)
 
-* Ensinar lógica proposicional de forma prática
-* Desenvolver raciocínio lógico
-* Aplicar conceitos em um ambiente gamificado
-* Praticar organização de projetos em Python
-
----
-
-## Módulos do jogo
-
-| Módulo | Tema                     | Conteúdo                          |
-| ------ | ------------------------ | --------------------------------- |
-| 1      | Conectivos Lógicos       | ∧, ∨, ¬                           |
-| 2      | Tabela-Verdade           | Implicação (→)                    |
-| 3      | Implicação Lógica        | Argumentação (Modus Ponens, etc.) |
-| 4      | Equivalência Lógica      | Leis de De Morgan, contrapositiva |
-| 5      | Tautologia e Contradição | Classificação de proposições      |
-
-A cada partida, **3 perguntas distintas** são sorteadas de cada módulo via `random.sample()`.
+* **Imersão Sonora**: Integração com a biblioteca `Pygame` para gerenciamento de trilha sonora e efeitos sonoros (SFX) durante acertos, erros e navegação.
+* **Persistência de Dados**: Utilização de banco de dados local para salvar o progresso da missão e permitir o carregamento de partidas.
+* **Ranking de Pilotos**: Sistema de pontuação acumulada com exibição de um "Top 10" para estimular o valor de replay.
+* [cite_start]**Banco de Perguntas Aleatório**: Cada módulo possui 8 questões cadastradas, das quais 3 são sorteadas via `random.sample()` a cada partida, garantindo uma experiência única a cada sessão[cite: 10, 17, 25].
 
 ---
 
-## ⚙️ Tecnologias utilizadas
+## 📁 Estrutura do Projeto
 
-* Python 3.10+
-* Biblioteca `sys` — efeito typewriter no terminal
-* Biblioteca `time` — pausas e animações
-* Biblioteca `threading` — timer em thread paralela
-* Biblioteca `random` — sorteio do banco de perguntas
+[cite_start]O sistema segue uma arquitetura modular para garantir alta coesão e facilidade de manutenção[cite: 11, 22].
 
----
-
-## 📁 Estrutura do projeto
-
-```
+```text
 escape_room_logico/
-├── main.py                <- ponto de entrada
-├── game.py                <- motor do jogo e orquestração dos módulos
-├── config.py              <- configurações globais
-├── utils/
-│   ├── display.py         <- funções de interface e feedback
-│   └── timer.py           <- contagem regressiva opcional
-└── fases/
-├── conectivos.py          <- Módulo 1 (banco de 8 perguntas)
-├── tabela_verdade.py      <- Módulo 2 (banco de 8 perguntas)
-├── implicacao.py          <- Módulo 3 (banco de 8 perguntas)
-├── equivalencia.py        <- Módulo 4 (banco de 8 perguntas)
-└── tautologia.py          <- Módulo 5 (banco de 8 perguntas)
+[cite_start]├── main.py                <- Ponto de entrada do sistema [cite: 47]
+[cite_start]├── game.py                <- Motor principal e controle de fluxo [cite: 48]
+[cite_start]├── config.py              <- Parâmetros globais e constantes [cite: 49, 55]
+├── database.db            <- Banco de dados (SQLite) para saves e ranking
+[cite_start]├── utils/                 <- Módulos auxiliares de utilidade [cite: 50]
+[cite_start]│   ├── display.py         <- Interface narrativa e efeito typewriter [cite: 64, 70]
+│   ├── audio.py           <- Gerenciador de som (SFX e Música)
+│   ├── banco.py           <- Manipulação do banco de dados (Ranking)
+[cite_start]│   └── timer.py           <- Cronômetro em thread paralela [cite: 73]
+[cite_start]└── fases/                 <- Conteúdo temático e bancos de perguntas [cite: 51]
+    [cite_start]├── conectivos.py      <- Módulo 1: Conectivos Lógicos (∧, ∨, ¬) [cite: 116]
+    [cite_start]├── tabela_verdade.py  <- Módulo 2: Tabela-Verdade (→) [cite: 120]
+    [cite_start]├── implicacao.py      <- Módulo 3: Implicação Lógica (Argumentos) [cite: 123]
+    [cite_start]├── equivalencia.py    <- Módulo 4: Equivalência Lógica (De Morgan) [cite: 126]
+    [cite_start]└── tautologia.py      <- Módulo 5: Tautologia e Contradição [cite: 129]
 ```
 
 ---
 
-## ▶️ Como executar
+## ⚙️ Tecnologias Utilizadas
 
-### Pré-requisitos
+* [cite_start]**Python 3.10+**: Linguagem base do sistema[cite: 8].
+* **Rich**: Formatação avançada e cores para interface via terminal.
+* **Pygame**: Motor para execução de áudio e efeitos sonoros.
+* **SQLite3**: Persistência de dados local.
+* [cite_start]**Threading**: Execução de timer em segundo plano[cite: 73].
 
-* Python 3.10 ou superior
+---
 
-### Passo a passo
+## 🎮 Como Jogar
 
+1.  [cite_start]**Teste de Admissão**: O jogador deve traduzir corretamente uma condicional ($P \rightarrow Q$) para avançar[cite: 138, 160].
+2.  [cite_start]**Desafios**: Resolva 3 questões por módulo temático[cite: 139].
+3.  **Mecânicas**:
+    * [cite_start]**Tentativas**: Cada desafio possui um limite de `MAX_TENTATIVAS`[cite: 57, 164].
+    * [cite_start]**Dicas**: Mensagens pedagógicas são exibidas em caso de erro[cite: 165].
+    * [cite_start]**Progresso**: Acompanhamento em tempo real (ex: 5/15 sistemas restaurados)[cite: 168].
+4.  [cite_start]**Vitória**: A conclusão do 5º módulo libera a nave para o piloto[cite: 141].
+
+---
+
+## 🔮 Evoluções Futuras (Roadmap)
+
+* **Interface TUI**: Implementação de molduras estáticas e layouts fixos para maior imersão visual.
+* **Comandos CLI**: Criação de atalhos globais (como `HELP` ou `STATUS`) para auxílio dinâmico durante as perguntas.
+
+---
+
+## ▶️ Execução
+
+Instale as dependências necessárias:
 ```bash
-cd escape_room_logico
+pip install pygame rich
+```
+
+Inicie o jogo:
+```bash
 python main.py
 ```
-
----
-
-## Executar uma fase isolada
-
-```bash
-python -c "from fases.conectivos import fase1; fase1()"
 ```
-
----
-
-## Como funciona o jogo?
-
-1. **Teste de admissão** — antes de iniciar, o jogador traduz `P → Q` para linguagem natural
-2. **Sorteio** — 3 perguntas aleatórias são sorteadas do banco de cada módulo
-3. **Desafio** — cada pergunta apresenta um enunciado lógico com múltipla escolha
-4. **Tentativas** — o jogador tem `MAX_TENTATIVAS` por desafio (configurável em `config.py`)
-5. **Dica** — ao esgotar as tentativas, uma dica pedagógica é exibida
-6. **Progresso** — o contador `X/15` é atualizado a cada desafio concluído
-7. **Vitória** — todos os 5 módulos concluídos liberta a nave
-
----
-
-## Conceitos abordados
-
-* **Conectivos lógicos** — conjunção (∧), disjunção (∨) e negação (¬)
-* **Tabela-verdade** — construção e interpretação, com ênfase na implicação
-* **Implicação lógica** — Modus Ponens, Modus Tollens e falácias lógicas
-* **Equivalência lógica** — lei da implicação, leis de De Morgan, contrapositiva
-* **Tautologia, contradição e contingência** — classificação de proposições compostas

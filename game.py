@@ -1,37 +1,58 @@
-# ============================================================
-#  ESCAPE ROOM LÓGICO — Controlador do Jogo
-# ============================================================
-
 import time
+import sys
+from rich.console import Console
+from rich.table import Table
+from utils.audio import iniciar_musica, tocar_sfx
 from utils.display import (
     escrever, imprimir_separador, imprimir_vitoria,
-    imprimir_banner_assunto,
+    imprimir_banner_assunto, imprimir_cabecalho, imprimir_fim_de_jogo
 )
+from utils.banco import inicializar_banco, salvar_progresso, carregar_jogador, obter_ranking
 from fases import conectivos, tabela_verdade, implicacao, equivalencia, tautologia
 
+console = Console()
+
 MODULOS = [
-    {"nome": "Conectivos Lógicos",                    "modulo": conectivos},
-    {"nome": "Tabela-Verdade",                        "modulo": tabela_verdade},
-    {"nome": "Implicação Lógica",                     "modulo": implicacao},
-    {"nome": "Equivalência Lógica",                   "modulo": equivalencia},
-    {"nome": "Tautologia / Contradição / Contingência","modulo": tautologia},
+    {"nome": "Conectivos Lógicos", "modulo": conectivos},
+    {"nome": "Tabela-Verdade", "modulo": tabela_verdade},
+    {"nome": "Implicação Lógica", "modulo": implicacao},
+    {"nome": "Equivalência Lógica", "modulo": equivalencia},
+    {"nome": "Tautologia / Contradição / Contingência", "modulo": tautologia},
 ]
 
+def exibir_menu_inicial():
+    console.clear()
+    imprimir_cabecalho("NAVE INTERESTELAR X-17", "SISTEMA DE SEGURANÇA LÓGICA")
+    console.print("  [1] [bold green]INICIAR NOVA MISSÃO[/bold green]")
+    console.print("  [2] [bold blue]CONTINUAR MISSÃO (LOAD)[/bold blue]")
+    console.print("  [3] [bold magenta]RANKING DE PILOTOS[/bold magenta]")
+    console.print("  [4] [bold red]SAIR DO SISTEMA[/bold red]")
+    console.print("\n" + "─" * 56)
+    return input("  > Selecione uma opção: ")
+
+def exibir_ranking_pilotos():
+    ranking = obter_ranking()
+    console.clear()
+    table = Table(title="🏆 TOP PILOTOS", style="magenta", border_style="cyan")
+    table.add_column("Pos", justify="center")
+    table.add_column("Piloto", style="bold white")
+    table.add_column("Pontos", justify="right", style="green")
+
+    if not ranking:
+        table.add_row("-", "Nenhum dado", "0")
+    else:
+        for i, (nome, pontos) in enumerate(ranking, 1):
+            table.add_row(str(i), nome, str(pontos))
+    console.print(table)
+    input("\n  Pressione ENTER para retornar...")
 
 def _teste_entrada() -> None:
     escrever("  Antes de iniciar, prove que você merece entrar na nave...")
     time.sleep(0.5)
-    print()
-    escrever("  📋  TESTE DE ADMISSÃO:")
+    escrever("\n  📋 TESTE DE ADMISSÃO:")
     imprimir_separador()
-    print()
-    escrever("  Considere as proposições:")
-    print()
-    escrever("     P: Se eu estudar")
-    escrever("     Q: Vou conseguir passar na prova do professor Lucas")
-    print()
-    escrever("  Questão: Traduza  ( P → Q )  para linguagem natural.")
-    print()
+    escrever("  Considere as proposições:\n     P: Se eu estudar\n     Q: Vou conseguir passar na prova do professor Lucas")
+    escrever("\n  Questão: Traduza ( P → Q ) para linguagem natural.")
     imprimir_separador()
 
     respostas_aceitas = [
@@ -39,86 +60,83 @@ def _teste_entrada() -> None:
         "se eu estudar vou conseguir passar na prova do professor lucas",
         "se eu estudar, então vou conseguir passar na prova do professor lucas",
         "se eu estudar então vou conseguir passar na prova do professor lucas",
-        "se estudar, vou passar na prova do professor lucas",
-        "se estudar vou passar na prova do professor lucas",
-        "se eu estudar, passarei na prova do professor lucas",
-        "se eu estudar passarei na prova do professor lucas",
-        "Se eu estudar, então vou conseguir passar na prova do professor Lucas"
+        "Se eu estudar, então vou conseguir passar na prova do professor Lucas.",
+        "Se eu estudar, vou conseguir passar na prova do professor Lucas",
+        "se eu estudar, vou conseguir passar na prova do professor lucas"
     ]
 
     while True:
-        print()
-        resposta = input("  > Digite a tradução: ").strip().lower()
-        if resposta in respostas_aceitas:
-            escrever("\n  ✅  Admissão aprovada! Você está pronto para a missão.")
+        resposta = input("\n  > Digite a tradução: ").strip().lower()
+        if any(aceita in resposta for aceita in respostas_aceitas):
+            escrever("\n  ✅ Admissão aprovada! Sistema liberado.")
             time.sleep(0.8)
             break
         else:
-            escrever("  ❌  Não foi dessa vez. Lembre-se: P → Q = 'Se P, então Q'.\n")
-
+            escrever("  ❌ Tente novamente. Dica: Use 'Se P, então Q'.")
 
 def _introducao() -> None:
-    print("\n" + "═" * 56)
-    escrever("  🛸  NAVE INTERESTELAR X-17")
-    escrever("      SISTEMA DE SEGURANÇA ATIVADO")
-    print("═" * 56)
-    print()
-    time.sleep(0.3)
+    console.clear()
+    console.print("\n" + "═" * 56, style="cyan")
+    escrever("  🛸 NAVE INTERESTELAR X-17 - SISTEMA DE SEGURANÇA")
+    console.print("═" * 56 + "\n", style="cyan")
     escrever("  Ano 2157. Sua nave foi capturada por um vírus lógico.")
-    escrever("  Todos os 5 módulos de segurança estão bloqueados.")
-    escrever("  Cada módulo sorteará 3 perguntas aleatórias do seu banco.")
-    escrever("  A cada partida as perguntas serão diferentes!\n")
-    escrever("  Você tem  tentativas por desafio.")
-    escrever("  Erre demais e a nave se autodestruirá.\n")
-    time.sleep(0.5)
+    escrever("  Restaure os 5 módulos para sobreviver.")
     _teste_entrada()
-    print()
-    input("  [ Pressione ENTER para iniciar a missão ] ")
-    print()
+    input("\n  [ Pressione ENTER para iniciar ]")
 
+def jogar(nome, pontos_iniciais=0, modulo_inicio=0):
+    pontuacao = pontos_iniciais
+    total_perguntas = len(MODULOS) * 3
+    concluidos = modulo_inicio * 3
 
-def _transicao(proxima: str) -> None:
-    print()
-    imprimir_separador()
-    escrever(f"  🔓  Próximo desafio...")
-    time.sleep(0.8)
+    if modulo_inicio == 0:
+        _introducao()
 
-
-def _derrota(modulo_nome: str) -> None:
-    print()
-    escrever(f"  💥  Falha no módulo: {modulo_nome}")
-    escrever("  A nave entrou em colapso. Missão encerrada.")
-    print()
-
-
-def iniciar() -> None:
-    _introducao()
-
-    total = len(MODULOS) * 3
-    concluidos = 0
-
-    for i, item in enumerate(MODULOS):
+    for i in range(modulo_inicio, len(MODULOS)):
+        item = MODULOS[i]
+        tocar_sfx("porta")
         imprimir_banner_assunto(item["nome"])
-
+        
         perguntas = item["modulo"].sortear(3)
 
-        for j, pergunta in enumerate(perguntas):
+        for pergunta in perguntas:
             passou = item["modulo"]._rodar(pergunta)
 
-            if not passou:
-                _derrota(item["nome"])
-                return
+            if passou:
+                pontuacao += 100
+                concluidos += 1
+                console.print(f"\n[bold green]📊 Progresso: {concluidos}/{total_perguntas} sistemas restaurados.[/bold green]")
+                imprimir_separador()
+            else:
+                imprimir_fim_de_jogo()
+                return 
 
-            concluidos += 1
-            escrever(f"  📊  Progresso: {concluidos}/{total} desafios concluídos.")
-
-            if j + 1 < len(perguntas):
-                _transicao(item["nome"])
-
-        if i + 1 < len(MODULOS):
-            print()
-            escrever("  ✨  MÓDULO COMPLETO! Avançando para o próximo...")
-            time.sleep(1)
-            imprimir_banner_assunto(MODULOS[i + 1]["nome"])
+        salvar_progresso(nome, pontuacao, i + 1)
+        escrever(f"\n  💾 Progresso salvo: Módulo {item['nome']} concluído!")
+        time.sleep(1)
 
     imprimir_vitoria()
+    escrever(f"  PONTUAÇÃO FINAL DO PILOTO {nome}: {pontuacao} PONTOS")
+    input("\n  Pressione ENTER para voltar ao menu...")
+
+def iniciar() -> None:
+    inicializar_banco()
+    iniciar_musica()
+    
+    while True:
+        opcao = exibir_menu_inicial()
+        if opcao == "1":
+            nome = input("  > Nome do Piloto: ").strip().upper()
+            if nome: jogar(nome, 0, 0)
+        elif opcao == "2":
+            nome = input("  > Digite seu Nome: ").strip().upper()
+            dados = carregar_jogador(nome)
+            if dados:
+                jogar(nome, dados[0], dados[1])
+            else:
+                escrever("  ❌ Piloto não encontrado.")
+                time.sleep(1)
+        elif opcao == "3":
+            exibir_ranking_pilotos()
+        elif opcao == "4":
+            sys.exit()
