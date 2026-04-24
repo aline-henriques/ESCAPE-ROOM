@@ -6,7 +6,6 @@ import tkinter.font as tkfont
 
 app_instancia = None
 
-
 class InterfaceGalaxia(ctk.CTk):
     def __init__(self):
         super().__init__()
@@ -828,14 +827,14 @@ class InterfaceGalaxia(ctk.CTk):
         self.canvas.create_text(
             (x1 + x2) / 2,
             y1 + 92,
-            text="GAME-OVER",
+            text="FIM DE JOGO",
             fill="#FFE066",
             font=(self.fonte_pixel[0], 58, "bold"),
         )
         self.canvas.create_text(
             (x1 + x2) / 2,
             y1 + 182,
-            text="Parabéns, você conseguiu sair da nave! :)",
+            text="Parabéns, você conseguiu sair da nave!",
             fill="#7DF9FF",
             font=(self.fonte_pixel[0], 20, "bold"),
         )
